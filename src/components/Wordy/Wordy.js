@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 import Box from './Box'
 
@@ -11,6 +11,28 @@ const Wordy = () => {
         ['', '', '', '', ''],
         ['', '', '', '', '']
     ])
+
+    const keyDownRef = useRef(null)
+
+    const isLetterKey = keyCode => keyCode > 64 && keyCode < 91
+
+    const handleKeyDown = ({ key, keyCode }) => {
+        if (isLetterKey(keyCode)) {
+            //TODO populate word
+        }
+    }
+
+    useEffect(() => { keyDownRef.current = handleKeyDown }) // update after each render
+
+    useEffect(() => {
+        const cb = e => keyDownRef.current(e)
+
+        window.addEventListener('keydown', cb)
+
+        return () => {
+            window.removeEventListener('keydown', cb)
+        }
+    }, [])
 
     return (
         <div className="row mt-3">
