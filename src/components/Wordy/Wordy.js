@@ -12,13 +12,28 @@ const Wordy = () => {
         ['', '', '', '', '']
     ])
 
+    const [index, setIndex] = useState(0)
     const keyDownRef = useRef(null)
 
     const isLetterKey = keyCode => keyCode > 64 && keyCode < 91
 
+    const insertLetter = (letter, word) => {
+        const availablePosition = word.indexOf('')
+
+        word[availablePosition] = letter.toUpperCase()
+
+        return word
+    }
+
     const handleKeyDown = ({ key, keyCode }) => {
         if (isLetterKey(keyCode)) {
-            //TODO populate word
+            const currentWord = [...words[index]]
+            const word = insertLetter(key, currentWord)
+
+            const newWords = [...words]
+            newWords[index] = word
+
+            setWords(newWords)
         }
     }
 
