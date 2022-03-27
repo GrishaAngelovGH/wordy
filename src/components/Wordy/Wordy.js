@@ -26,8 +26,8 @@ const Wordy = () => {
 
     const [targetWord, setTargetWord] = useState(getRandomWord(availableWords))
     const [showRestartButton, setShowRestartButton] = useState(false)
-
     const [index, setIndex] = useState(0)
+
     const keyDownRef = useRef(null)
 
     const isLetterKey = keyCode => keyCode > 64 && keyCode < 91
@@ -37,7 +37,6 @@ const Wordy = () => {
     const insertLetter = (letter, word) => {
         const availablePosition = word.indexOf('')
         word[availablePosition] = letter
-
         return word
     }
 
@@ -49,7 +48,6 @@ const Wordy = () => {
 
         const availablePosition = word.indexOf('')
         word[availablePosition - 1] = ''
-
         return word
     }
 
@@ -62,9 +60,6 @@ const Wordy = () => {
     const isComplete = colors => colors.every(v => v === 'bg-success')
 
     const handleRestart = () => {
-        setShowRestartButton(false)
-        setIndex(0)
-
         setWords([
             ['', '', '', '', ''],
             ['', '', '', '', ''],
@@ -83,6 +78,8 @@ const Wordy = () => {
             ['bg-white', 'bg-white', 'bg-white', 'bg-white', 'bg-white']
         ])
 
+        setIndex(0)
+        setShowRestartButton(false)
         setTargetWord(getRandomWord(availableWords))
     }
 
@@ -103,8 +100,6 @@ const Wordy = () => {
         }
 
         if (isEnterKey(keyCode) && isCurrentWordComplete) {
-            setIndex(v => v + 1)
-
             const currentWord = words[index]
             const colorizedWord = colorize(currentWord)
 
@@ -114,6 +109,7 @@ const Wordy = () => {
             newColors[index] = colorizedWord
 
             setColors(newColors)
+            setIndex(v => v + 1)
         }
 
         if (isBackspace(keyCode)) {
