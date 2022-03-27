@@ -12,6 +12,17 @@ const Wordy = () => {
         ['', '', '', '', '']
     ])
 
+    const [colors, setColors] = useState([
+        ['bg-white', 'bg-white', 'bg-white', 'bg-white', 'bg-white'],
+        ['bg-white', 'bg-white', 'bg-white', 'bg-white', 'bg-white'],
+        ['bg-white', 'bg-white', 'bg-white', 'bg-white', 'bg-white'],
+        ['bg-white', 'bg-white', 'bg-white', 'bg-white', 'bg-white'],
+        ['bg-white', 'bg-white', 'bg-white', 'bg-white', 'bg-white'],
+        ['bg-white', 'bg-white', 'bg-white', 'bg-white', 'bg-white']
+    ])
+
+    const [targetWord, setTargetWord] = useState('')
+
     const [index, setIndex] = useState(0)
     const keyDownRef = useRef(null)
 
@@ -21,8 +32,7 @@ const Wordy = () => {
 
     const insertLetter = (letter, word) => {
         const availablePosition = word.indexOf('')
-
-        word[availablePosition] = letter.toUpperCase()
+        word[availablePosition] = letter
 
         return word
     }
@@ -38,6 +48,12 @@ const Wordy = () => {
 
         return word
     }
+
+    const colorize = word => word.map((v, i) => {
+        if (v === targetWord[i]) return 'bg-success'
+        if (v !== targetWord[i] && targetWord.includes(v)) return 'bg-warning'
+        return 'bg-secondary'
+    })
 
     const handleKeyDown = ({ key, keyCode }) => {
         const isCurrentWordComplete = words[index] && !words[index].includes('')
@@ -57,6 +73,14 @@ const Wordy = () => {
 
         if (isEnterKey(keyCode) && isCurrentWordComplete) {
             setIndex(v => v + 1)
+
+            const currentWord = words[index]
+            const colorizedWord = colorize(currentWord)
+
+            const newColors = [...colors]
+            newColors[index] = colorizedWord
+
+            setColors(newColors)
         }
 
         if (isBackspace(keyCode)) {
@@ -96,7 +120,7 @@ const Wordy = () => {
                             <div key={i} className="d-flex justify-content-center">
                                 {
                                     word.map((v, j) => (
-                                        <Box key={`${i}_${j}`} value={v} />
+                                        <Box key={`${i}_${j}`} value={v.toUpperCase()} color={colors[i][j]} />
                                     ))
                                 }
                             </div>
