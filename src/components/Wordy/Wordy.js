@@ -16,6 +16,7 @@ const Wordy = () => {
     const keyDownRef = useRef(null)
 
     const isLetterKey = keyCode => keyCode > 64 && keyCode < 91
+    const isEnterKey = keyCode => keyCode === 13
 
     const insertLetter = (letter, word) => {
         const availablePosition = word.indexOf('')
@@ -26,14 +27,23 @@ const Wordy = () => {
     }
 
     const handleKeyDown = ({ key, keyCode }) => {
+        const isCurrentWordComplete = words[index] && !words[index].includes('')
+
         if (isLetterKey(keyCode)) {
-            const currentWord = [...words[index]]
-            const word = insertLetter(key, currentWord)
+            const currentWord = words[index]
 
-            const newWords = [...words]
-            newWords[index] = word
+            if (currentWord) {
+                const word = insertLetter(key, [...currentWord])
 
-            setWords(newWords)
+                const newWords = [...words]
+                newWords[index] = word
+
+                setWords(newWords)
+            }
+        }
+
+        if (isEnterKey(keyCode) && isCurrentWordComplete) {
+            setIndex(v => v + 1)
         }
     }
 
