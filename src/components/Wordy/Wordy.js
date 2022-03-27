@@ -1,6 +1,9 @@
 import { useState, useEffect, useRef } from 'react'
 
 import Box from './Box'
+import availableWords from './words'
+
+const getRandomWord = words => words[Math.floor(Math.random() * words.length)]
 
 const Wordy = () => {
     const [words, setWords] = useState([
@@ -21,7 +24,8 @@ const Wordy = () => {
         ['bg-white', 'bg-white', 'bg-white', 'bg-white', 'bg-white']
     ])
 
-    const [targetWord, setTargetWord] = useState('')
+    const [targetWord, setTargetWord] = useState(getRandomWord(availableWords))
+    const [showRestartButton, setShowRestartButton] = useState(false)
 
     const [index, setIndex] = useState(0)
     const keyDownRef = useRef(null)
@@ -55,10 +59,37 @@ const Wordy = () => {
         return 'bg-secondary'
     })
 
+    const isComplete = colors => colors.every(v => v === 'bg-success')
+
+    const handleRestart = () => {
+        setShowRestartButton(false)
+        setIndex(0)
+
+        setWords([
+            ['', '', '', '', ''],
+            ['', '', '', '', ''],
+            ['', '', '', '', ''],
+            ['', '', '', '', ''],
+            ['', '', '', '', ''],
+            ['', '', '', '', '']
+        ])
+
+        setColors([
+            ['bg-white', 'bg-white', 'bg-white', 'bg-white', 'bg-white'],
+            ['bg-white', 'bg-white', 'bg-white', 'bg-white', 'bg-white'],
+            ['bg-white', 'bg-white', 'bg-white', 'bg-white', 'bg-white'],
+            ['bg-white', 'bg-white', 'bg-white', 'bg-white', 'bg-white'],
+            ['bg-white', 'bg-white', 'bg-white', 'bg-white', 'bg-white'],
+            ['bg-white', 'bg-white', 'bg-white', 'bg-white', 'bg-white']
+        ])
+
+        setTargetWord(getRandomWord(availableWords))
+    }
+
     const handleKeyDown = ({ key, keyCode }) => {
         const isCurrentWordComplete = words[index] && !words[index].includes('')
 
-        if (isLetterKey(keyCode)) {
+        if (isLetterKey(keyCode) && !showRestartButton) {
             const currentWord = words[index]
 
             if (currentWord) {
@@ -76,6 +107,8 @@ const Wordy = () => {
 
             const currentWord = words[index]
             const colorizedWord = colorize(currentWord)
+
+            isComplete(colorizedWord) && setShowRestartButton(true)
 
             const newColors = [...colors]
             newColors[index] = colorizedWord
@@ -109,10 +142,16 @@ const Wordy = () => {
         }
     }, [])
 
+    const restartButtonVisibility = showRestartButton ? 'visible' : 'invisible'
+
     return (
         <div className="row mt-3">
             <div className="col-md-12">
                 <h3 className="alert-success rounded">Wordy</h3>
+
+                <button className={`btn btn-primary ${restartButtonVisibility}`} onClick={handleRestart}>
+                    Restart
+                </button>
 
                 <div className="mt-3">
                     {
