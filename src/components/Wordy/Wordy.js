@@ -17,11 +17,24 @@ const Wordy = () => {
 
     const isLetterKey = keyCode => keyCode > 64 && keyCode < 91
     const isEnterKey = keyCode => keyCode === 13
+    const isBackspace = keyCode => keyCode === 8
 
     const insertLetter = (letter, word) => {
         const availablePosition = word.indexOf('')
 
         word[availablePosition] = letter.toUpperCase()
+
+        return word
+    }
+
+    const deleteLastLetter = word => {
+        if (!word.includes('')) {
+            word[word.length - 1] = ''
+            return word
+        }
+
+        const availablePosition = word.indexOf('')
+        word[availablePosition - 1] = ''
 
         return word
     }
@@ -44,6 +57,19 @@ const Wordy = () => {
 
         if (isEnterKey(keyCode) && isCurrentWordComplete) {
             setIndex(v => v + 1)
+        }
+
+        if (isBackspace(keyCode)) {
+            const currentWord = words[index]
+
+            if (currentWord) {
+                const word = deleteLastLetter([...currentWord])
+
+                const newWords = [...words]
+                newWords[index] = word
+
+                setWords(newWords)
+            }
         }
     }
 
