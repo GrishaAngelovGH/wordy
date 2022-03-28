@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 
 import Box from './Box'
+import Keyboard from './Keyboard'
 import availableWords from './words'
 
 const getRandomWord = words => words[Math.floor(Math.random() * words.length)]
@@ -150,7 +151,7 @@ const Wordy = () => {
     const targetWordVisibility = showTargetWord ? 'visible' : 'invisible'
 
     return (
-        <div className="row mt-3">
+        <div className="row mt-1">
             <div className="col-md-12">
                 <h3 className="alert-success rounded">Wordy</h3>
 
@@ -160,7 +161,7 @@ const Wordy = () => {
                     Restart
                 </button>
 
-                <div className="mt-3">
+                <div className="mt-1">
                     {
                         words.map((word, i) => (
                             <div key={i} className="d-flex justify-content-center">
@@ -173,6 +174,8 @@ const Wordy = () => {
                         ))
                     }
                 </div>
+
+                <Keyboard />
             </div>
         </div>
     )
