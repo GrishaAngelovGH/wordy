@@ -26,6 +26,7 @@ const Wordy = () => {
 
     const [targetWord, setTargetWord] = useState(getRandomWord(availableWords))
     const [showRestartButton, setShowRestartButton] = useState(false)
+    const [showTargetWord, setShowTargetWord] = useState(false)
     const [index, setIndex] = useState(0)
 
     const keyDownRef = useRef(null)
@@ -80,11 +81,13 @@ const Wordy = () => {
 
         setIndex(0)
         setShowRestartButton(false)
+        setShowTargetWord(false)
         setTargetWord(getRandomWord(availableWords))
     }
 
     const handleKeyDown = ({ key, keyCode }) => {
         const isCurrentWordComplete = words[index] && !words[index].includes('')
+        const isLastWord = index === Object.values(words).length - 1
 
         if (isLetterKey(keyCode) && !showRestartButton) {
             const currentWord = words[index]
@@ -104,6 +107,11 @@ const Wordy = () => {
             const colorizedWord = colorize(currentWord)
 
             isComplete(colorizedWord) && setShowRestartButton(true)
+
+            if (!isComplete(colorizedWord) && isLastWord) {
+                setShowTargetWord(true)
+                setShowRestartButton(true)
+            }
 
             const newColors = [...colors]
             newColors[index] = colorizedWord
@@ -139,11 +147,14 @@ const Wordy = () => {
     }, [])
 
     const restartButtonVisibility = showRestartButton ? 'visible' : 'invisible'
+    const targetWordVisibility = showTargetWord ? 'visible' : 'invisible'
 
     return (
         <div className="row mt-3">
             <div className="col-md-12">
                 <h3 className="alert-success rounded">Wordy</h3>
+
+                <h3 className={`alert-info rounded ${targetWordVisibility}`}>Target word: {targetWord}</h3>
 
                 <button className={`btn btn-primary ${restartButtonVisibility}`} onClick={handleRestart}>
                     Restart
