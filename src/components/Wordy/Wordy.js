@@ -156,7 +156,7 @@ const Wordy = () => {
 
                 <h3 className={`alert-info rounded ${targetWordVisibility}`}>Target word: {targetWord}</h3>
 
-                <button className={`btn btn-primary ${restartButtonVisibility}`} onClick={handleRestart}>
+                <button className={`btn btn-light ${restartButtonVisibility}`} onClick={handleRestart}>
                     Restart
                 </button>
 
