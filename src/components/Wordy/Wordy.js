@@ -150,6 +150,8 @@ const Wordy = () => {
     const restartButtonVisibility = showRestartButton ? 'visible' : 'invisible'
     const targetWordVisibility = showTargetWord ? 'visible' : 'invisible'
 
+    const prevIndex = index - 1 < 0 ? 0 : index - 1
+
     return (
         <div className="row mt-1">
             <div className="col-md-12">
@@ -175,7 +177,7 @@ const Wordy = () => {
                     }
                 </div>
 
-                <Keyboard />
+                <Keyboard word={words[prevIndex]} wordColors={colors[prevIndex]} />
             </div>
         </div>
     )
