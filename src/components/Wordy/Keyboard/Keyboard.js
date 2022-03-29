@@ -28,40 +28,24 @@ const Key = ({ value, color, event }) => {
 
 const Keyboard = ({ word, wordColors }) => {
     const [colors, setColors] = useState({
-        q: 'bg-transparent',
-        w: 'bg-transparent',
-        e: 'bg-transparent',
-        r: 'bg-transparent',
-        t: 'bg-transparent',
-        y: 'bg-transparent',
-        u: 'bg-transparent',
-        i: 'bg-transparent',
-        o: 'bg-transparent',
-        p: 'bg-transparent',
-        a: 'bg-transparent',
-        s: 'bg-transparent',
-        d: 'bg-transparent',
-        f: 'bg-transparent',
-        g: 'bg-transparent',
-        h: 'bg-transparent',
-        j: 'bg-transparent',
-        k: 'bg-transparent',
-        l: 'bg-transparent',
-        z: 'bg-transparent',
-        x: 'bg-transparent',
-        c: 'bg-transparent',
-        v: 'bg-transparent',
-        b: 'bg-transparent',
-        n: 'bg-transparent',
-        m: 'bg-transparent'
+        q: '', w: '', e: '', r: '', t: '', y: '', u: '', i: '', o: '', p: '',
+        a: '', s: '', d: '', f: '', g: '', h: '', j: '', k: '', l: '',
+        z: '', x: '', c: '', v: '', b: '', n: '', m: ''
     })
+
+    const [keyRows, setKeyRows] = useState([])
 
     useEffect(() => {
         setColors(values => {
             const newColors = { ...values }
+            const isEmptyWord = word.every(v => v === '')
+
+            isEmptyWord && setColors(values => ({
+                ...Object.keys(values).map(v => ({ [v]: 'bg-transparent' }))
+            }))
 
             word.forEach((v, i) => {
-                if (wordColors[i] !== 'bg-white' && colors[v] !== 'bg-success') {
+                if (wordColors[i] !== 'bg-white' && values[v] !== 'bg-success') {
                     newColors[v] = wordColors[i]
                 }
             })
@@ -70,44 +54,58 @@ const Keyboard = ({ word, wordColors }) => {
         })
     }, [wordColors, word])
 
+    useEffect(() => {
+        setKeyRows([
+            [
+                { value: 'Q', color: colors['q'], event: new KeyboardEvent('keydown', { key: 'q', keyCode: 81 }) },
+                { value: 'W', color: colors['w'], event: new KeyboardEvent('keydown', { key: 'w', keyCode: 87 }) },
+                { value: 'E', color: colors['e'], event: new KeyboardEvent('keydown', { key: 'e', keyCode: 69 }) },
+                { value: 'R', color: colors['r'], event: new KeyboardEvent('keydown', { key: 'r', keyCode: 82 }) },
+                { value: 'T', color: colors['t'], event: new KeyboardEvent('keydown', { key: 't', keyCode: 84 }) },
+                { value: 'Y', color: colors['y'], event: new KeyboardEvent('keydown', { key: 'y', keyCode: 89 }) },
+                { value: 'U', color: colors['u'], event: new KeyboardEvent('keydown', { key: 'u', keyCode: 85 }) },
+                { value: 'I', color: colors['i'], event: new KeyboardEvent('keydown', { key: 'i', keyCode: 73 }) },
+                { value: 'O', color: colors['o'], event: new KeyboardEvent('keydown', { key: 'o', keyCode: 79 }) },
+                { value: 'P', color: colors['p'], event: new KeyboardEvent('keydown', { key: 'p', keyCode: 80 }) }
+            ],
+            [
+                { value: 'A', color: colors['a'], event: new KeyboardEvent('keydown', { key: 'a', keyCode: 65 }) },
+                { value: 'S', color: colors['s'], event: new KeyboardEvent('keydown', { key: 's', keyCode: 83 }) },
+                { value: 'D', color: colors['d'], event: new KeyboardEvent('keydown', { key: 'd', keyCode: 68 }) },
+                { value: 'F', color: colors['f'], event: new KeyboardEvent('keydown', { key: 'f', keyCode: 70 }) },
+                { value: 'G', color: colors['g'], event: new KeyboardEvent('keydown', { key: 'g', keyCode: 71 }) },
+                { value: 'H', color: colors['h'], event: new KeyboardEvent('keydown', { key: 'h', keyCode: 72 }) },
+                { value: 'J', color: colors['j'], event: new KeyboardEvent('keydown', { key: 'j', keyCode: 74 }) },
+                { value: 'K', color: colors['k'], event: new KeyboardEvent('keydown', { key: 'k', keyCode: 75 }) },
+                { value: 'L', color: colors['l'], event: new KeyboardEvent('keydown', { key: 'l', keyCode: 76 }) }
+            ],
+            [
+                { value: <EnterIcon />, color: '', event: new KeyboardEvent('keydown', { key: 'Enter', keyCode: 13 }) },
+                { value: 'Z', color: colors['z'], event: new KeyboardEvent('keydown', { key: 'z', keyCode: 90 }) },
+                { value: 'X', color: colors['x'], event: new KeyboardEvent('keydown', { key: 'x', keyCode: 88 }) },
+                { value: 'C', color: colors['c'], event: new KeyboardEvent('keydown', { key: 'c', keyCode: 67 }) },
+                { value: 'V', color: colors['v'], event: new KeyboardEvent('keydown', { key: 'v', keyCode: 86 }) },
+                { value: 'B', color: colors['b'], event: new KeyboardEvent('keydown', { key: 'b', keyCode: 66 }) },
+                { value: 'N', color: colors['n'], event: new KeyboardEvent('keydown', { key: 'n', keyCode: 78 }) },
+                { value: 'M', color: colors['m'], event: new KeyboardEvent('keydown', { key: 'm', keyCode: 77 }) },
+                { value: <BackspaceIcon />, color: '', event: new KeyboardEvent('keydown', { key: 'Backspace', keyCode: 8 }) }
+            ]
+        ])
+    }, [colors])
+
     return (
         <div className="mt-md-3 keyboard">
-            <div className="d-flex">
-                <Key value={'Q'} color={colors['q']} event={new KeyboardEvent('keydown', { key: 'q', keyCode: 81 })} />
-                <Key value={'W'} color={colors['w']} event={new KeyboardEvent('keydown', { key: 'w', keyCode: 87 })} />
-                <Key value={'E'} color={colors['e']} event={new KeyboardEvent('keydown', { key: 'e', keyCode: 69 })} />
-                <Key value={'R'} color={colors['r']} event={new KeyboardEvent('keydown', { key: 'r', keyCode: 82 })} />
-                <Key value={'T'} color={colors['t']} event={new KeyboardEvent('keydown', { key: 't', keyCode: 84 })} />
-                <Key value={'Y'} color={colors['y']} event={new KeyboardEvent('keydown', { key: 'y', keyCode: 89 })} />
-                <Key value={'U'} color={colors['u']} event={new KeyboardEvent('keydown', { key: 'u', keyCode: 85 })} />
-                <Key value={'I'} color={colors['i']} event={new KeyboardEvent('keydown', { key: 'i', keyCode: 73 })} />
-                <Key value={'O'} color={colors['o']} event={new KeyboardEvent('keydown', { key: 'o', keyCode: 79 })} />
-                <Key value={'P'} color={colors['p']} event={new KeyboardEvent('keydown', { key: 'p', keyCode: 80 })} />
-            </div>
-
-            <div className="d-flex">
-                <Key value={'A'} color={colors['a']} event={new KeyboardEvent('keydown', { key: 'a', keyCode: 65 })} />
-                <Key value={'S'} color={colors['s']} event={new KeyboardEvent('keydown', { key: 's', keyCode: 83 })} />
-                <Key value={'D'} color={colors['d']} event={new KeyboardEvent('keydown', { key: 'd', keyCode: 68 })} />
-                <Key value={'F'} color={colors['f']} event={new KeyboardEvent('keydown', { key: 'f', keyCode: 70 })} />
-                <Key value={'G'} color={colors['g']} event={new KeyboardEvent('keydown', { key: 'g', keyCode: 71 })} />
-                <Key value={'H'} color={colors['h']} event={new KeyboardEvent('keydown', { key: 'h', keyCode: 72 })} />
-                <Key value={'J'} color={colors['j']} event={new KeyboardEvent('keydown', { key: 'j', keyCode: 74 })} />
-                <Key value={'K'} color={colors['k']} event={new KeyboardEvent('keydown', { key: 'k', keyCode: 75 })} />
-                <Key value={'L'} color={colors['l']} event={new KeyboardEvent('keydown', { key: 'l', keyCode: 76 })} />
-            </div>
-
-            <div className="d-flex">
-                <Key value={<EnterIcon />} event={new KeyboardEvent('keydown', { key: 'Enter', keyCode: 13 })} />
-                <Key value={'Z'} color={colors['z']} event={new KeyboardEvent('keydown', { key: 'z', keyCode: 90 })} />
-                <Key value={'X'} color={colors['x']} event={new KeyboardEvent('keydown', { key: 'x', keyCode: 88 })} />
-                <Key value={'C'} color={colors['c']} event={new KeyboardEvent('keydown', { key: 'c', keyCode: 67 })} />
-                <Key value={'V'} color={colors['v']} event={new KeyboardEvent('keydown', { key: 'v', keyCode: 86 })} />
-                <Key value={'B'} color={colors['b']} event={new KeyboardEvent('keydown', { key: 'b', keyCode: 66 })} />
-                <Key value={'N'} color={colors['n']} event={new KeyboardEvent('keydown', { key: 'n', keyCode: 78 })} />
-                <Key value={'M'} color={colors['m']} event={new KeyboardEvent('keydown', { key: 'm', keyCode: 77 })} />
-                <Key value={<BackspaceIcon />} event={new KeyboardEvent('keydown', { key: 'Backspace', keyCode: 8 })} />
-            </div>
+            {
+                keyRows.map((keyRow, i) => (
+                    <div key={i} className="d-flex">
+                        {
+                            keyRow.map((v, j) => (
+                                <Key key={`${i}_${j}`} value={v.value} color={v.color} event={v.event} />
+                            ))
+                        }
+                    </div>
+                ))
+            }
         </div>
     )
 }
