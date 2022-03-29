@@ -1,7 +1,9 @@
 import { useState, useEffect, useRef } from 'react'
 
 import Box from './Box'
+import Modal from './Modal'
 import Keyboard from './Keyboard'
+
 import availableWords from './words'
 
 const getRandomWord = words => words[Math.floor(Math.random() * words.length)]
@@ -28,6 +30,7 @@ const Wordy = () => {
     const [targetWord, setTargetWord] = useState(getRandomWord(availableWords))
     const [showRestartButton, setShowRestartButton] = useState(false)
     const [showTargetWord, setShowTargetWord] = useState(false)
+    const [showSuccessMessage, setShowSuccessMessage] = useState(false)
     const [index, setIndex] = useState(0)
 
     const keyDownRef = useRef(null)
@@ -83,6 +86,7 @@ const Wordy = () => {
         setIndex(0)
         setShowRestartButton(false)
         setShowTargetWord(false)
+        setShowSuccessMessage(false)
         setTargetWord(getRandomWord(availableWords))
     }
 
@@ -107,7 +111,10 @@ const Wordy = () => {
             const currentWord = words[index]
             const colorizedWord = colorize(currentWord)
 
-            isComplete(colorizedWord) && setShowRestartButton(true)
+            if (isComplete(colorizedWord)) {
+                setShowSuccessMessage(true)
+                setShowRestartButton(true)
+            }
 
             if (!isComplete(colorizedWord) && isLastWord) {
                 setShowTargetWord(true)
@@ -148,7 +155,6 @@ const Wordy = () => {
     }, [])
 
     const restartButtonVisibility = showRestartButton ? 'visible' : 'invisible'
-    const targetWordVisibility = showTargetWord ? 'visible' : 'invisible'
 
     const prevIndex = index - 1 < 0 ? 0 : index - 1
 
@@ -157,7 +163,8 @@ const Wordy = () => {
             <div className="col-md-12">
                 <h3 className="alert-success rounded">Wordy</h3>
 
-                <h3 className={`alert-info rounded ${targetWordVisibility}`}>Target word: {targetWord}</h3>
+                {showTargetWord && (<Modal title={'Target Word'} message={targetWord.toUpperCase()} />)}
+                {showSuccessMessage && (<Modal title={'Correct !'} message={'You successfully guessed the word'} />)}
 
                 <button className={`btn btn-light ${restartButtonVisibility}`} onClick={handleRestart}>
                     Restart
