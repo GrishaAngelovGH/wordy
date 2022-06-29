@@ -40,9 +40,11 @@ const Keyboard = ({ word, wordColors }) => {
             const newColors = { ...values }
             const isEmptyWord = word.every(v => v === '')
 
-            isEmptyWord && setColors(values => ({
-                ...Object.keys(values).map(v => ({ [v]: 'bg-transparent' }))
-            }))
+            if (isEmptyWord) {
+                return ({
+                    ...Object.keys(values).map(v => ({ [v]: 'bg-transparent' }))
+                })
+            }
 
             word.forEach((v, i) => {
                 if (wordColors[i] !== 'bg-white' && values[v] !== 'bg-success') {
