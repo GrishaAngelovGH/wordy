@@ -18,7 +18,7 @@ Object {
               class="col-md-12"
             >
               <h3
-                class="alert-success rounded"
+                class="alert alert-success"
               >
                 Wordy
               </h3>
@@ -375,7 +375,7 @@ Object {
             class="col-md-12"
           >
             <h3
-              class="alert-success rounded"
+              class="alert alert-success"
             >
               Wordy
             </h3>

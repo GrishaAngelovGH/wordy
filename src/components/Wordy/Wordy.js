@@ -161,7 +161,7 @@ const Wordy = () => {
     return (
         <div className="row mt-1">
             <div className="col-md-12">
-                <h3 className="alert-success rounded">Wordy</h3>
+                <h3 className="alert alert-success">Wordy</h3>
 
                 {showTargetWord && (<Modal title={'Target Word'} message={targetWord.toUpperCase()} />)}
                 {showSuccessMessage && (<Modal title={'Correct !'} message={'You successfully guessed the word'} />)}
