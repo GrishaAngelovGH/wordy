@@ -48,3 +48,28 @@ export const defaultColors = [
   ['bg-white', 'bg-white', 'bg-white', 'bg-white', 'bg-white'],
   ['bg-white', 'bg-white', 'bg-white', 'bg-white', 'bg-white']
 ]
+
+export const getRandomWord = words => words[Math.floor(Math.random() * words.length)]
+
+export const insertLetter = (letter, word) => {
+  const availablePosition = word.indexOf('')
+  word[availablePosition] = letter
+  return word
+}
+
+export const deleteLastLetter = word => {
+  if (!word.includes('')) {
+    word[word.length - 1] = ''
+    return word
+  }
+
+  const availablePosition = word.indexOf('')
+  word[availablePosition - 1] = ''
+  return word
+}
+
+export const colorize = (word, targetWord) => word.map((v, i) => {
+  if (v === targetWord[i]) return 'bg-success'
+  if (v !== targetWord[i] && targetWord.includes(v)) return 'bg-warning'
+  return 'bg-secondary'
+})

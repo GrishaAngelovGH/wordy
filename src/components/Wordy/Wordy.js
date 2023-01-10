@@ -7,10 +7,17 @@ import Keyboard from './Keyboard'
 import {
   availableWords,
   defaultWords,
-  defaultColors
+  defaultColors,
+  getRandomWord,
+  insertLetter,
+  deleteLastLetter,
+  colorize
 } from './words'
 
-const getRandomWord = words => words[Math.floor(Math.random() * words.length)]
+const isLetterKey = keyCode => keyCode > 64 && keyCode < 91
+const isEnterKey = keyCode => keyCode === 13
+const isBackspace = keyCode => keyCode === 8
+const isComplete = colors => colors.every(v => v === 'bg-success')
 
 const Wordy = () => {
   const [words, setWords] = useState(defaultWords)
@@ -23,35 +30,6 @@ const Wordy = () => {
   const [index, setIndex] = useState(0)
 
   const keyDownRef = useRef(null)
-
-  const isLetterKey = keyCode => keyCode > 64 && keyCode < 91
-  const isEnterKey = keyCode => keyCode === 13
-  const isBackspace = keyCode => keyCode === 8
-
-  const insertLetter = (letter, word) => {
-    const availablePosition = word.indexOf('')
-    word[availablePosition] = letter
-    return word
-  }
-
-  const deleteLastLetter = word => {
-    if (!word.includes('')) {
-      word[word.length - 1] = ''
-      return word
-    }
-
-    const availablePosition = word.indexOf('')
-    word[availablePosition - 1] = ''
-    return word
-  }
-
-  const colorize = word => word.map((v, i) => {
-    if (v === targetWord[i]) return 'bg-success'
-    if (v !== targetWord[i] && targetWord.includes(v)) return 'bg-warning'
-    return 'bg-secondary'
-  })
-
-  const isComplete = colors => colors.every(v => v === 'bg-success')
 
   const handleRestart = () => {
     setWords(defaultWords)
@@ -83,7 +61,7 @@ const Wordy = () => {
 
     if (isEnterKey(keyCode) && isCurrentWordComplete) {
       const currentWord = words[index]
-      const colorizedWord = colorize(currentWord)
+      const colorizedWord = colorize(currentWord, targetWord)
 
       if (isComplete(colorizedWord)) {
         setShowSuccessMessage(true)
