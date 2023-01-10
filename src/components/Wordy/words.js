@@ -1,4 +1,4 @@
-const words = [
+export const availableWords = [
   'mount', 'power', 'north', 'month', 'think',
   'kings', 'drink', 'marks', 'sport', 'bread',
   'drive', 'pride', 'grand', 'great', 'light',
@@ -31,4 +31,20 @@ const words = [
   'pixel', 'audio', 'topic', 'tower', 'music'
 ]
 
-export default words
+export const defaultWords = [
+  ['', '', '', '', ''],
+  ['', '', '', '', ''],
+  ['', '', '', '', ''],
+  ['', '', '', '', ''],
+  ['', '', '', '', ''],
+  ['', '', '', '', '']
+]
+
+export const defaultColors = [
+  ['bg-white', 'bg-white', 'bg-white', 'bg-white', 'bg-white'],
+  ['bg-white', 'bg-white', 'bg-white', 'bg-white', 'bg-white'],
+  ['bg-white', 'bg-white', 'bg-white', 'bg-white', 'bg-white'],
+  ['bg-white', 'bg-white', 'bg-white', 'bg-white', 'bg-white'],
+  ['bg-white', 'bg-white', 'bg-white', 'bg-white', 'bg-white'],
+  ['bg-white', 'bg-white', 'bg-white', 'bg-white', 'bg-white']
+]

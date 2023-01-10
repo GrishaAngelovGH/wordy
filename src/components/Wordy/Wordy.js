@@ -4,28 +4,17 @@ import Box from './Box'
 import Modal from './Modal'
 import Keyboard from './Keyboard'
 
-import availableWords from './words'
+import {
+  availableWords,
+  defaultWords,
+  defaultColors
+} from './words'
 
 const getRandomWord = words => words[Math.floor(Math.random() * words.length)]
 
 const Wordy = () => {
-  const [words, setWords] = useState([
-    ['', '', '', '', ''],
-    ['', '', '', '', ''],
-    ['', '', '', '', ''],
-    ['', '', '', '', ''],
-    ['', '', '', '', ''],
-    ['', '', '', '', '']
-  ])
-
-  const [colors, setColors] = useState([
-    ['bg-white', 'bg-white', 'bg-white', 'bg-white', 'bg-white'],
-    ['bg-white', 'bg-white', 'bg-white', 'bg-white', 'bg-white'],
-    ['bg-white', 'bg-white', 'bg-white', 'bg-white', 'bg-white'],
-    ['bg-white', 'bg-white', 'bg-white', 'bg-white', 'bg-white'],
-    ['bg-white', 'bg-white', 'bg-white', 'bg-white', 'bg-white'],
-    ['bg-white', 'bg-white', 'bg-white', 'bg-white', 'bg-white']
-  ])
+  const [words, setWords] = useState(defaultWords)
+  const [colors, setColors] = useState(defaultColors)
 
   const [targetWord, setTargetWord] = useState(getRandomWord(availableWords))
   const [showRestartButton, setShowRestartButton] = useState(false)
@@ -65,23 +54,8 @@ const Wordy = () => {
   const isComplete = colors => colors.every(v => v === 'bg-success')
 
   const handleRestart = () => {
-    setWords([
-      ['', '', '', '', ''],
-      ['', '', '', '', ''],
-      ['', '', '', '', ''],
-      ['', '', '', '', ''],
-      ['', '', '', '', ''],
-      ['', '', '', '', '']
-    ])
-
-    setColors([
-      ['bg-white', 'bg-white', 'bg-white', 'bg-white', 'bg-white'],
-      ['bg-white', 'bg-white', 'bg-white', 'bg-white', 'bg-white'],
-      ['bg-white', 'bg-white', 'bg-white', 'bg-white', 'bg-white'],
-      ['bg-white', 'bg-white', 'bg-white', 'bg-white', 'bg-white'],
-      ['bg-white', 'bg-white', 'bg-white', 'bg-white', 'bg-white'],
-      ['bg-white', 'bg-white', 'bg-white', 'bg-white', 'bg-white']
-    ])
+    setWords(defaultWords)
+    setColors(defaultColors)
 
     setIndex(0)
     setShowRestartButton(false)
