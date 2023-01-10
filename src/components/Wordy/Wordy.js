@@ -9,185 +9,185 @@ import availableWords from './words'
 const getRandomWord = words => words[Math.floor(Math.random() * words.length)]
 
 const Wordy = () => {
-    const [words, setWords] = useState([
-        ['', '', '', '', ''],
-        ['', '', '', '', ''],
-        ['', '', '', '', ''],
-        ['', '', '', '', ''],
-        ['', '', '', '', ''],
-        ['', '', '', '', '']
+  const [words, setWords] = useState([
+    ['', '', '', '', ''],
+    ['', '', '', '', ''],
+    ['', '', '', '', ''],
+    ['', '', '', '', ''],
+    ['', '', '', '', ''],
+    ['', '', '', '', '']
+  ])
+
+  const [colors, setColors] = useState([
+    ['bg-white', 'bg-white', 'bg-white', 'bg-white', 'bg-white'],
+    ['bg-white', 'bg-white', 'bg-white', 'bg-white', 'bg-white'],
+    ['bg-white', 'bg-white', 'bg-white', 'bg-white', 'bg-white'],
+    ['bg-white', 'bg-white', 'bg-white', 'bg-white', 'bg-white'],
+    ['bg-white', 'bg-white', 'bg-white', 'bg-white', 'bg-white'],
+    ['bg-white', 'bg-white', 'bg-white', 'bg-white', 'bg-white']
+  ])
+
+  const [targetWord, setTargetWord] = useState(getRandomWord(availableWords))
+  const [showRestartButton, setShowRestartButton] = useState(false)
+  const [showTargetWord, setShowTargetWord] = useState(false)
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false)
+  const [index, setIndex] = useState(0)
+
+  const keyDownRef = useRef(null)
+
+  const isLetterKey = keyCode => keyCode > 64 && keyCode < 91
+  const isEnterKey = keyCode => keyCode === 13
+  const isBackspace = keyCode => keyCode === 8
+
+  const insertLetter = (letter, word) => {
+    const availablePosition = word.indexOf('')
+    word[availablePosition] = letter
+    return word
+  }
+
+  const deleteLastLetter = word => {
+    if (!word.includes('')) {
+      word[word.length - 1] = ''
+      return word
+    }
+
+    const availablePosition = word.indexOf('')
+    word[availablePosition - 1] = ''
+    return word
+  }
+
+  const colorize = word => word.map((v, i) => {
+    if (v === targetWord[i]) return 'bg-success'
+    if (v !== targetWord[i] && targetWord.includes(v)) return 'bg-warning'
+    return 'bg-secondary'
+  })
+
+  const isComplete = colors => colors.every(v => v === 'bg-success')
+
+  const handleRestart = () => {
+    setWords([
+      ['', '', '', '', ''],
+      ['', '', '', '', ''],
+      ['', '', '', '', ''],
+      ['', '', '', '', ''],
+      ['', '', '', '', ''],
+      ['', '', '', '', '']
     ])
 
-    const [colors, setColors] = useState([
-        ['bg-white', 'bg-white', 'bg-white', 'bg-white', 'bg-white'],
-        ['bg-white', 'bg-white', 'bg-white', 'bg-white', 'bg-white'],
-        ['bg-white', 'bg-white', 'bg-white', 'bg-white', 'bg-white'],
-        ['bg-white', 'bg-white', 'bg-white', 'bg-white', 'bg-white'],
-        ['bg-white', 'bg-white', 'bg-white', 'bg-white', 'bg-white'],
-        ['bg-white', 'bg-white', 'bg-white', 'bg-white', 'bg-white']
+    setColors([
+      ['bg-white', 'bg-white', 'bg-white', 'bg-white', 'bg-white'],
+      ['bg-white', 'bg-white', 'bg-white', 'bg-white', 'bg-white'],
+      ['bg-white', 'bg-white', 'bg-white', 'bg-white', 'bg-white'],
+      ['bg-white', 'bg-white', 'bg-white', 'bg-white', 'bg-white'],
+      ['bg-white', 'bg-white', 'bg-white', 'bg-white', 'bg-white'],
+      ['bg-white', 'bg-white', 'bg-white', 'bg-white', 'bg-white']
     ])
 
-    const [targetWord, setTargetWord] = useState(getRandomWord(availableWords))
-    const [showRestartButton, setShowRestartButton] = useState(false)
-    const [showTargetWord, setShowTargetWord] = useState(false)
-    const [showSuccessMessage, setShowSuccessMessage] = useState(false)
-    const [index, setIndex] = useState(0)
+    setIndex(0)
+    setShowRestartButton(false)
+    setShowTargetWord(false)
+    setShowSuccessMessage(false)
+    setTargetWord(getRandomWord(availableWords))
+  }
 
-    const keyDownRef = useRef(null)
+  const handleKeyDown = ({ key, keyCode }) => {
+    const isCurrentWordComplete = words[index] && !words[index].includes('')
+    const isLastWord = index === Object.values(words).length - 1
 
-    const isLetterKey = keyCode => keyCode > 64 && keyCode < 91
-    const isEnterKey = keyCode => keyCode === 13
-    const isBackspace = keyCode => keyCode === 8
+    if (isLetterKey(keyCode) && !showRestartButton) {
+      const currentWord = words[index]
 
-    const insertLetter = (letter, word) => {
-        const availablePosition = word.indexOf('')
-        word[availablePosition] = letter
-        return word
+      if (currentWord) {
+        const word = insertLetter(key, [...currentWord])
+
+        const newWords = [...words]
+        newWords[index] = word
+
+        setWords(newWords)
+      }
     }
 
-    const deleteLastLetter = word => {
-        if (!word.includes('')) {
-            word[word.length - 1] = ''
-            return word
-        }
+    if (isEnterKey(keyCode) && isCurrentWordComplete) {
+      const currentWord = words[index]
+      const colorizedWord = colorize(currentWord)
 
-        const availablePosition = word.indexOf('')
-        word[availablePosition - 1] = ''
-        return word
+      if (isComplete(colorizedWord)) {
+        setShowSuccessMessage(true)
+        setShowRestartButton(true)
+      }
+
+      if (!isComplete(colorizedWord) && isLastWord) {
+        setShowTargetWord(true)
+        setShowRestartButton(true)
+      }
+
+      const newColors = [...colors]
+      newColors[index] = colorizedWord
+
+      setColors(newColors)
+      setIndex(v => v + 1)
     }
 
-    const colorize = word => word.map((v, i) => {
-        if (v === targetWord[i]) return 'bg-success'
-        if (v !== targetWord[i] && targetWord.includes(v)) return 'bg-warning'
-        return 'bg-secondary'
-    })
+    if (isBackspace(keyCode)) {
+      const currentWord = words[index]
 
-    const isComplete = colors => colors.every(v => v === 'bg-success')
+      if (currentWord) {
+        const word = deleteLastLetter([...currentWord])
 
-    const handleRestart = () => {
-        setWords([
-            ['', '', '', '', ''],
-            ['', '', '', '', ''],
-            ['', '', '', '', ''],
-            ['', '', '', '', ''],
-            ['', '', '', '', ''],
-            ['', '', '', '', '']
-        ])
+        const newWords = [...words]
+        newWords[index] = word
 
-        setColors([
-            ['bg-white', 'bg-white', 'bg-white', 'bg-white', 'bg-white'],
-            ['bg-white', 'bg-white', 'bg-white', 'bg-white', 'bg-white'],
-            ['bg-white', 'bg-white', 'bg-white', 'bg-white', 'bg-white'],
-            ['bg-white', 'bg-white', 'bg-white', 'bg-white', 'bg-white'],
-            ['bg-white', 'bg-white', 'bg-white', 'bg-white', 'bg-white'],
-            ['bg-white', 'bg-white', 'bg-white', 'bg-white', 'bg-white']
-        ])
-
-        setIndex(0)
-        setShowRestartButton(false)
-        setShowTargetWord(false)
-        setShowSuccessMessage(false)
-        setTargetWord(getRandomWord(availableWords))
+        setWords(newWords)
+      }
     }
+  }
 
-    const handleKeyDown = ({ key, keyCode }) => {
-        const isCurrentWordComplete = words[index] && !words[index].includes('')
-        const isLastWord = index === Object.values(words).length - 1
+  useEffect(() => { keyDownRef.current = handleKeyDown }) // update after each render
 
-        if (isLetterKey(keyCode) && !showRestartButton) {
-            const currentWord = words[index]
+  useEffect(() => {
+    const cb = e => keyDownRef.current(e)
 
-            if (currentWord) {
-                const word = insertLetter(key, [...currentWord])
+    window.addEventListener('keydown', cb)
 
-                const newWords = [...words]
-                newWords[index] = word
-
-                setWords(newWords)
-            }
-        }
-
-        if (isEnterKey(keyCode) && isCurrentWordComplete) {
-            const currentWord = words[index]
-            const colorizedWord = colorize(currentWord)
-
-            if (isComplete(colorizedWord)) {
-                setShowSuccessMessage(true)
-                setShowRestartButton(true)
-            }
-
-            if (!isComplete(colorizedWord) && isLastWord) {
-                setShowTargetWord(true)
-                setShowRestartButton(true)
-            }
-
-            const newColors = [...colors]
-            newColors[index] = colorizedWord
-
-            setColors(newColors)
-            setIndex(v => v + 1)
-        }
-
-        if (isBackspace(keyCode)) {
-            const currentWord = words[index]
-
-            if (currentWord) {
-                const word = deleteLastLetter([...currentWord])
-
-                const newWords = [...words]
-                newWords[index] = word
-
-                setWords(newWords)
-            }
-        }
+    return () => {
+      window.removeEventListener('keydown', cb)
     }
+  }, [])
 
-    useEffect(() => { keyDownRef.current = handleKeyDown }) // update after each render
+  const restartButtonVisibility = showRestartButton ? 'visible' : 'invisible'
 
-    useEffect(() => {
-        const cb = e => keyDownRef.current(e)
+  const prevIndex = index - 1 < 0 ? 0 : index - 1
 
-        window.addEventListener('keydown', cb)
+  return (
+    <div className="row mt-1">
+      <div className="col-md-12">
+        <h3 className="alert alert-success">Wordy</h3>
 
-        return () => {
-            window.removeEventListener('keydown', cb)
-        }
-    }, [])
+        {showTargetWord && (<Modal title={'Target Word'} message={targetWord.toUpperCase()} />)}
+        {showSuccessMessage && (<Modal title={'Correct !'} message={'You successfully guessed the word'} />)}
 
-    const restartButtonVisibility = showRestartButton ? 'visible' : 'invisible'
+        <button className={`btn btn-light ${restartButtonVisibility}`} onClick={handleRestart}>
+          Restart
+        </button>
 
-    const prevIndex = index - 1 < 0 ? 0 : index - 1
-
-    return (
-        <div className="row mt-1">
-            <div className="col-md-12">
-                <h3 className="alert alert-success">Wordy</h3>
-
-                {showTargetWord && (<Modal title={'Target Word'} message={targetWord.toUpperCase()} />)}
-                {showSuccessMessage && (<Modal title={'Correct !'} message={'You successfully guessed the word'} />)}
-
-                <button className={`btn btn-light ${restartButtonVisibility}`} onClick={handleRestart}>
-                    Restart
-                </button>
-
-                <div className="mt-1">
-                    {
-                        words.map((word, i) => (
-                            <div key={i} className="d-flex justify-content-center">
-                                {
-                                    word.map((v, j) => (
-                                        <Box key={`${i}_${j}`} value={v.toUpperCase()} color={colors[i][j]} />
-                                    ))
-                                }
-                            </div>
-                        ))
-                    }
-                </div>
-
-                <Keyboard word={words[prevIndex]} wordColors={colors[prevIndex]} />
-            </div>
+        <div className="mt-1">
+          {
+            words.map((word, i) => (
+              <div key={i} className="d-flex justify-content-center">
+                {
+                  word.map((v, j) => (
+                    <Box key={`${i}_${j}`} value={v.toUpperCase()} color={colors[i][j]} />
+                  ))
+                }
+              </div>
+            ))
+          }
         </div>
-    )
+
+        <Keyboard word={words[prevIndex]} wordColors={colors[prevIndex]} />
+      </div>
+    </div>
+  )
 }
 
 export default Wordy
