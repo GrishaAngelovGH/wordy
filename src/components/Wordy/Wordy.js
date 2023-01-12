@@ -46,52 +46,54 @@ const Wordy = () => {
     const isCurrentWordComplete = words[index] && !words[index].includes('')
     const isLastWord = index === Object.values(words).length - 1
 
-    if (isLetterKey(keyCode) && !showRestartButton) {
+    const processLetterKey = () => {
       const currentWord = words[index]
 
       if (currentWord) {
-        const word = insertLetter(key, [...currentWord])
-
-        const newWords = [...words]
-        newWords[index] = word
-
-        setWords(newWords)
+        setWords(oldWords => {
+          const newWords = [...oldWords]
+          newWords[index] = insertLetter(key, [...currentWord])
+          return newWords
+        })
       }
     }
 
-    if (isEnterKey(keyCode) && isCurrentWordComplete) {
+    const processEnterKey = () => {
       const currentWord = words[index]
       const colorizedWord = colorize(currentWord, targetWord)
 
-      if (isComplete(colorizedWord)) {
-        setShowSuccessMessage(true)
-        setShowRestartButton(true)
-      }
+      isComplete(colorizedWord) && setShowSuccessMessage(true)
+      isComplete(colorizedWord) && setShowRestartButton(true)
 
-      if (!isComplete(colorizedWord) && isLastWord) {
-        setShowTargetWord(true)
-        setShowRestartButton(true)
-      }
+      !isComplete(colorizedWord) && isLastWord && setShowTargetWord(true)
+      !isComplete(colorizedWord) && isLastWord && setShowRestartButton(true)
 
-      const newColors = [...colors]
-      newColors[index] = colorizedWord
+      setColors(oldColors => {
+        const newColors = [...oldColors]
+        newColors[index] = colorizedWord
+        return newColors
+      })
 
-      setColors(newColors)
       setIndex(v => v + 1)
     }
 
-    if (isBackspace(keyCode)) {
+    const processBackspace = () => {
       const currentWord = words[index]
 
       if (currentWord) {
-        const word = deleteLastLetter([...currentWord])
-
-        const newWords = [...words]
-        newWords[index] = word
-
-        setWords(newWords)
+        setWords(oldWords => {
+          const newWords = [...oldWords]
+          newWords[index] = deleteLastLetter([...currentWord])
+          return newWords
+        })
       }
     }
+
+    isLetterKey(keyCode) && !showRestartButton && processLetterKey()
+
+    isEnterKey(keyCode) && isCurrentWordComplete && processEnterKey()
+
+    isBackspace(keyCode) && processBackspace()
   }
 
   useEffect(() => { keyDownRef.current = handleKeyDown }) // update after each render
