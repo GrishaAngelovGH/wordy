@@ -14,7 +14,7 @@ const ModalWrapper = ({ title, message }) => {
       </Modal.Header>
       <Modal.Body>{message}</Modal.Body>
       <Modal.Footer>
-        <Button variant="primary" onClick={handleClose}>
+        <Button variant='primary' onClick={handleClose}>
           Close
         </Button>
       </Modal.Footer>

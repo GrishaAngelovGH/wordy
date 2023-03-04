@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`should render component 1`] = `
+exports[`should render Wordy component 1`] = `
 Object {
   "asFragment": [Function],
   "baseElement": <body>
@@ -12,7 +12,7 @@ Object {
           class="col-md-12"
         >
           <h3
-            class="alert alert-success"
+            class="alert alert-success p-0"
           >
             Wordy
           </h3>
@@ -146,61 +146,61 @@ Object {
               class="d-flex"
             >
               <div
-                class="d-flex justify-content-center align-items-center border boder-2 rounded m-1 text-white key undefined"
+                class="d-flex justify-content-center align-items-center border boder-2 bg-transparent rounded m-1 text-white key"
                 role="button"
               >
                 Q
               </div>
               <div
-                class="d-flex justify-content-center align-items-center border boder-2 rounded m-1 text-white key undefined"
+                class="d-flex justify-content-center align-items-center border boder-2 bg-transparent rounded m-1 text-white key"
                 role="button"
               >
                 W
               </div>
               <div
-                class="d-flex justify-content-center align-items-center border boder-2 rounded m-1 text-white key undefined"
+                class="d-flex justify-content-center align-items-center border boder-2 bg-transparent rounded m-1 text-white key"
                 role="button"
               >
                 E
               </div>
               <div
-                class="d-flex justify-content-center align-items-center border boder-2 rounded m-1 text-white key undefined"
+                class="d-flex justify-content-center align-items-center border boder-2 bg-transparent rounded m-1 text-white key"
                 role="button"
               >
                 R
               </div>
               <div
-                class="d-flex justify-content-center align-items-center border boder-2 rounded m-1 text-white key undefined"
+                class="d-flex justify-content-center align-items-center border boder-2 bg-transparent rounded m-1 text-white key"
                 role="button"
               >
                 T
               </div>
               <div
-                class="d-flex justify-content-center align-items-center border boder-2 rounded m-1 text-white key undefined"
+                class="d-flex justify-content-center align-items-center border boder-2 bg-transparent rounded m-1 text-white key"
                 role="button"
               >
                 Y
               </div>
               <div
-                class="d-flex justify-content-center align-items-center border boder-2 rounded m-1 text-white key undefined"
+                class="d-flex justify-content-center align-items-center border boder-2 bg-transparent rounded m-1 text-white key"
                 role="button"
               >
                 U
               </div>
               <div
-                class="d-flex justify-content-center align-items-center border boder-2 rounded m-1 text-white key undefined"
+                class="d-flex justify-content-center align-items-center border boder-2 bg-transparent rounded m-1 text-white key"
                 role="button"
               >
                 I
               </div>
               <div
-                class="d-flex justify-content-center align-items-center border boder-2 rounded m-1 text-white key undefined"
+                class="d-flex justify-content-center align-items-center border boder-2 bg-transparent rounded m-1 text-white key"
                 role="button"
               >
                 O
               </div>
               <div
-                class="d-flex justify-content-center align-items-center border boder-2 rounded m-1 text-white key undefined"
+                class="d-flex justify-content-center align-items-center border boder-2 bg-transparent rounded m-1 text-white key"
                 role="button"
               >
                 P
@@ -210,55 +210,55 @@ Object {
               class="d-flex"
             >
               <div
-                class="d-flex justify-content-center align-items-center border boder-2 rounded m-1 text-white key undefined"
+                class="d-flex justify-content-center align-items-center border boder-2 bg-transparent rounded m-1 text-white key"
                 role="button"
               >
                 A
               </div>
               <div
-                class="d-flex justify-content-center align-items-center border boder-2 rounded m-1 text-white key undefined"
+                class="d-flex justify-content-center align-items-center border boder-2 bg-transparent rounded m-1 text-white key"
                 role="button"
               >
                 S
               </div>
               <div
-                class="d-flex justify-content-center align-items-center border boder-2 rounded m-1 text-white key undefined"
+                class="d-flex justify-content-center align-items-center border boder-2 bg-transparent rounded m-1 text-white key"
                 role="button"
               >
                 D
               </div>
               <div
-                class="d-flex justify-content-center align-items-center border boder-2 rounded m-1 text-white key undefined"
+                class="d-flex justify-content-center align-items-center border boder-2 bg-transparent rounded m-1 text-white key"
                 role="button"
               >
                 F
               </div>
               <div
-                class="d-flex justify-content-center align-items-center border boder-2 rounded m-1 text-white key undefined"
+                class="d-flex justify-content-center align-items-center border boder-2 bg-transparent rounded m-1 text-white key"
                 role="button"
               >
                 G
               </div>
               <div
-                class="d-flex justify-content-center align-items-center border boder-2 rounded m-1 text-white key undefined"
+                class="d-flex justify-content-center align-items-center border boder-2 bg-transparent rounded m-1 text-white key"
                 role="button"
               >
                 H
               </div>
               <div
-                class="d-flex justify-content-center align-items-center border boder-2 rounded m-1 text-white key undefined"
+                class="d-flex justify-content-center align-items-center border boder-2 bg-transparent rounded m-1 text-white key"
                 role="button"
               >
                 J
               </div>
               <div
-                class="d-flex justify-content-center align-items-center border boder-2 rounded m-1 text-white key undefined"
+                class="d-flex justify-content-center align-items-center border boder-2 bg-transparent rounded m-1 text-white key"
                 role="button"
               >
                 K
               </div>
               <div
-                class="d-flex justify-content-center align-items-center border boder-2 rounded m-1 text-white key undefined"
+                class="d-flex justify-content-center align-items-center border boder-2 bg-transparent rounded m-1 text-white key"
                 role="button"
               >
                 L
@@ -268,7 +268,7 @@ Object {
               class="d-flex"
             >
               <div
-                class="d-flex justify-content-center align-items-center border boder-2 rounded m-1 text-white key "
+                class="d-flex justify-content-center align-items-center border boder-2 bg-transparent rounded m-1 text-white key"
                 role="button"
               >
                 <svg
@@ -286,49 +286,49 @@ Object {
                 </svg>
               </div>
               <div
-                class="d-flex justify-content-center align-items-center border boder-2 rounded m-1 text-white key undefined"
+                class="d-flex justify-content-center align-items-center border boder-2 bg-transparent rounded m-1 text-white key"
                 role="button"
               >
                 Z
               </div>
               <div
-                class="d-flex justify-content-center align-items-center border boder-2 rounded m-1 text-white key undefined"
+                class="d-flex justify-content-center align-items-center border boder-2 bg-transparent rounded m-1 text-white key"
                 role="button"
               >
                 X
               </div>
               <div
-                class="d-flex justify-content-center align-items-center border boder-2 rounded m-1 text-white key undefined"
+                class="d-flex justify-content-center align-items-center border boder-2 bg-transparent rounded m-1 text-white key"
                 role="button"
               >
                 C
               </div>
               <div
-                class="d-flex justify-content-center align-items-center border boder-2 rounded m-1 text-white key undefined"
+                class="d-flex justify-content-center align-items-center border boder-2 bg-transparent rounded m-1 text-white key"
                 role="button"
               >
                 V
               </div>
               <div
-                class="d-flex justify-content-center align-items-center border boder-2 rounded m-1 text-white key undefined"
+                class="d-flex justify-content-center align-items-center border boder-2 bg-transparent rounded m-1 text-white key"
                 role="button"
               >
                 B
               </div>
               <div
-                class="d-flex justify-content-center align-items-center border boder-2 rounded m-1 text-white key undefined"
+                class="d-flex justify-content-center align-items-center border boder-2 bg-transparent rounded m-1 text-white key"
                 role="button"
               >
                 N
               </div>
               <div
-                class="d-flex justify-content-center align-items-center border boder-2 rounded m-1 text-white key undefined"
+                class="d-flex justify-content-center align-items-center border boder-2 bg-transparent rounded m-1 text-white key"
                 role="button"
               >
                 M
               </div>
               <div
-                class="d-flex justify-content-center align-items-center border boder-2 rounded m-1 text-white key "
+                class="d-flex justify-content-center align-items-center border boder-2 bg-transparent rounded m-1 text-white key"
                 role="button"
               >
                 <svg
@@ -361,7 +361,7 @@ Object {
         class="col-md-12"
       >
         <h3
-          class="alert alert-success"
+          class="alert alert-success p-0"
         >
           Wordy
         </h3>
@@ -495,61 +495,61 @@ Object {
             class="d-flex"
           >
             <div
-              class="d-flex justify-content-center align-items-center border boder-2 rounded m-1 text-white key undefined"
+              class="d-flex justify-content-center align-items-center border boder-2 bg-transparent rounded m-1 text-white key"
               role="button"
             >
               Q
             </div>
             <div
-              class="d-flex justify-content-center align-items-center border boder-2 rounded m-1 text-white key undefined"
+              class="d-flex justify-content-center align-items-center border boder-2 bg-transparent rounded m-1 text-white key"
               role="button"
             >
               W
             </div>
             <div
-              class="d-flex justify-content-center align-items-center border boder-2 rounded m-1 text-white key undefined"
+              class="d-flex justify-content-center align-items-center border boder-2 bg-transparent rounded m-1 text-white key"
               role="button"
             >
               E
             </div>
             <div
-              class="d-flex justify-content-center align-items-center border boder-2 rounded m-1 text-white key undefined"
+              class="d-flex justify-content-center align-items-center border boder-2 bg-transparent rounded m-1 text-white key"
               role="button"
             >
               R
             </div>
             <div
-              class="d-flex justify-content-center align-items-center border boder-2 rounded m-1 text-white key undefined"
+              class="d-flex justify-content-center align-items-center border boder-2 bg-transparent rounded m-1 text-white key"
               role="button"
             >
               T
             </div>
             <div
-              class="d-flex justify-content-center align-items-center border boder-2 rounded m-1 text-white key undefined"
+              class="d-flex justify-content-center align-items-center border boder-2 bg-transparent rounded m-1 text-white key"
               role="button"
             >
               Y
             </div>
             <div
-              class="d-flex justify-content-center align-items-center border boder-2 rounded m-1 text-white key undefined"
+              class="d-flex justify-content-center align-items-center border boder-2 bg-transparent rounded m-1 text-white key"
               role="button"
             >
               U
             </div>
             <div
-              class="d-flex justify-content-center align-items-center border boder-2 rounded m-1 text-white key undefined"
+              class="d-flex justify-content-center align-items-center border boder-2 bg-transparent rounded m-1 text-white key"
               role="button"
             >
               I
             </div>
             <div
-              class="d-flex justify-content-center align-items-center border boder-2 rounded m-1 text-white key undefined"
+              class="d-flex justify-content-center align-items-center border boder-2 bg-transparent rounded m-1 text-white key"
               role="button"
             >
               O
             </div>
             <div
-              class="d-flex justify-content-center align-items-center border boder-2 rounded m-1 text-white key undefined"
+              class="d-flex justify-content-center align-items-center border boder-2 bg-transparent rounded m-1 text-white key"
               role="button"
             >
               P
@@ -559,55 +559,55 @@ Object {
             class="d-flex"
           >
             <div
-              class="d-flex justify-content-center align-items-center border boder-2 rounded m-1 text-white key undefined"
+              class="d-flex justify-content-center align-items-center border boder-2 bg-transparent rounded m-1 text-white key"
               role="button"
             >
               A
             </div>
             <div
-              class="d-flex justify-content-center align-items-center border boder-2 rounded m-1 text-white key undefined"
+              class="d-flex justify-content-center align-items-center border boder-2 bg-transparent rounded m-1 text-white key"
               role="button"
             >
               S
             </div>
             <div
-              class="d-flex justify-content-center align-items-center border boder-2 rounded m-1 text-white key undefined"
+              class="d-flex justify-content-center align-items-center border boder-2 bg-transparent rounded m-1 text-white key"
               role="button"
             >
               D
             </div>
             <div
-              class="d-flex justify-content-center align-items-center border boder-2 rounded m-1 text-white key undefined"
+              class="d-flex justify-content-center align-items-center border boder-2 bg-transparent rounded m-1 text-white key"
               role="button"
             >
               F
             </div>
             <div
-              class="d-flex justify-content-center align-items-center border boder-2 rounded m-1 text-white key undefined"
+              class="d-flex justify-content-center align-items-center border boder-2 bg-transparent rounded m-1 text-white key"
               role="button"
             >
               G
             </div>
             <div
-              class="d-flex justify-content-center align-items-center border boder-2 rounded m-1 text-white key undefined"
+              class="d-flex justify-content-center align-items-center border boder-2 bg-transparent rounded m-1 text-white key"
               role="button"
             >
               H
             </div>
             <div
-              class="d-flex justify-content-center align-items-center border boder-2 rounded m-1 text-white key undefined"
+              class="d-flex justify-content-center align-items-center border boder-2 bg-transparent rounded m-1 text-white key"
               role="button"
             >
               J
             </div>
             <div
-              class="d-flex justify-content-center align-items-center border boder-2 rounded m-1 text-white key undefined"
+              class="d-flex justify-content-center align-items-center border boder-2 bg-transparent rounded m-1 text-white key"
               role="button"
             >
               K
             </div>
             <div
-              class="d-flex justify-content-center align-items-center border boder-2 rounded m-1 text-white key undefined"
+              class="d-flex justify-content-center align-items-center border boder-2 bg-transparent rounded m-1 text-white key"
               role="button"
             >
               L
@@ -617,7 +617,7 @@ Object {
             class="d-flex"
           >
             <div
-              class="d-flex justify-content-center align-items-center border boder-2 rounded m-1 text-white key "
+              class="d-flex justify-content-center align-items-center border boder-2 bg-transparent rounded m-1 text-white key"
               role="button"
             >
               <svg
@@ -635,49 +635,49 @@ Object {
               </svg>
             </div>
             <div
-              class="d-flex justify-content-center align-items-center border boder-2 rounded m-1 text-white key undefined"
+              class="d-flex justify-content-center align-items-center border boder-2 bg-transparent rounded m-1 text-white key"
               role="button"
             >
               Z
             </div>
             <div
-              class="d-flex justify-content-center align-items-center border boder-2 rounded m-1 text-white key undefined"
+              class="d-flex justify-content-center align-items-center border boder-2 bg-transparent rounded m-1 text-white key"
               role="button"
             >
               X
             </div>
             <div
-              class="d-flex justify-content-center align-items-center border boder-2 rounded m-1 text-white key undefined"
+              class="d-flex justify-content-center align-items-center border boder-2 bg-transparent rounded m-1 text-white key"
               role="button"
             >
               C
             </div>
             <div
-              class="d-flex justify-content-center align-items-center border boder-2 rounded m-1 text-white key undefined"
+              class="d-flex justify-content-center align-items-center border boder-2 bg-transparent rounded m-1 text-white key"
               role="button"
             >
               V
             </div>
             <div
-              class="d-flex justify-content-center align-items-center border boder-2 rounded m-1 text-white key undefined"
+              class="d-flex justify-content-center align-items-center border boder-2 bg-transparent rounded m-1 text-white key"
               role="button"
             >
               B
             </div>
             <div
-              class="d-flex justify-content-center align-items-center border boder-2 rounded m-1 text-white key undefined"
+              class="d-flex justify-content-center align-items-center border boder-2 bg-transparent rounded m-1 text-white key"
               role="button"
             >
               N
             </div>
             <div
-              class="d-flex justify-content-center align-items-center border boder-2 rounded m-1 text-white key undefined"
+              class="d-flex justify-content-center align-items-center border boder-2 bg-transparent rounded m-1 text-white key"
               role="button"
             >
               M
             </div>
             <div
-              class="d-flex justify-content-center align-items-center border boder-2 rounded m-1 text-white key "
+              class="d-flex justify-content-center align-items-center border boder-2 bg-transparent rounded m-1 text-white key"
               role="button"
             >
               <svg

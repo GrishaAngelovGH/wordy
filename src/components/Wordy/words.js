@@ -68,7 +68,7 @@ export const deleteLastLetter = word => {
   return word
 }
 
-export const colorize = (word, targetWord) => word.map((v, i) => {
+export const colorize = (word, targetWord) => word && word.map((v, i) => {
   if (v === targetWord[i]) return 'bg-success'
   if (v !== targetWord[i] && targetWord.includes(v)) return 'bg-warning'
   return 'bg-secondary'
