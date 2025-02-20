@@ -1,59 +1,24 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`should render Modal component 1`] = `
-Object {
+exports[`should render Box component 1`] = `
+{
   "asFragment": [Function],
-  "baseElement": <body
-    class="modal-open"
-    data-rr-ui-modal-open=""
-    style="padding-right: 1024px;"
-  >
-    <div />
-    <div
-      class="fade modal-backdrop show"
-    />
-    <div
-      aria-modal="true"
-      class="fade modal show"
-      role="dialog"
-      style="display: block; padding-right: 0px;"
-      tabindex="-1"
-    >
+  "baseElement": <body>
+    <div>
       <div
-        class="modal-dialog"
+        class="d-flex justify-content-center align-items-center border border-2 fw-bold rounded box bg-white text-dark"
       >
-        <div
-          class="modal-content"
-        >
-          <div
-            class="modal-header"
-          >
-            <div
-              class="modal-title h4"
-            >
-              title
-            </div>
-          </div>
-          <div
-            class="modal-body"
-          >
-            message
-          </div>
-          <div
-            class="modal-footer"
-          >
-            <button
-              class="btn btn-primary"
-              type="button"
-            >
-              Close
-            </button>
-          </div>
-        </div>
+        a
       </div>
     </div>
   </body>,
-  "container": <div />,
+  "container": <div>
+    <div
+      class="d-flex justify-content-center align-items-center border border-2 fw-bold rounded box bg-white text-dark"
+    >
+      a
+    </div>
+  </div>,
   "debug": [Function],
   "findAllByAltText": [Function],
   "findAllByDisplayValue": [Function],
