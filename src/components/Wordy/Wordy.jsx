@@ -1,8 +1,10 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useMemo } from 'react'
 
 import Box from './Box'
 import Modal from './Modal'
 import Keyboard from './Keyboard'
+
+import { defaultKeyColors } from './Keyboard/keys'
 
 import {
   availableWords,
@@ -89,6 +91,26 @@ const Wordy = () => {
     setTargetWord(getRandomWord(availableWords))
   }
 
+  const keyColors = useMemo(() => {
+    const newColors = { ...defaultKeyColors }
+
+    words.forEach((word, i) => {
+      const wordColors = colors[i]
+      const isWordColored = wordColors.some(c => c !== 'bg-white')
+
+      if (isWordColored) {
+        word.forEach((char, charIndex) => {
+          const color = wordColors[charIndex]
+          if (newColors[char] !== 'bg-success') {
+            newColors[char] = color
+          }
+        })
+      }
+    })
+
+    return newColors
+  }, [words, colors])
+
   useEffect(() => { keydownRef.current = handleKeydown })
 
   useEffect(() => {
@@ -100,8 +122,6 @@ const Wordy = () => {
       window.removeEventListener('keydown', cb)
     }
   }, [])
-
-  const prevIndex = index - 1 < 0 ? 0 : index - 1
 
   return (
     <div className='row mt-1'>
@@ -133,7 +153,7 @@ const Wordy = () => {
           }
         </div>
 
-        <Keyboard word={words[prevIndex]} wordColors={colors[prevIndex]} />
+        <Keyboard keyColors={keyColors} />
 
         {showTargetWord && (<Modal title={'Target Word'} message={targetWord.toUpperCase()} />)}
         {showSuccessMessage && (<Modal title={'Correct !'} message={'You successfully guessed the word'} />)}

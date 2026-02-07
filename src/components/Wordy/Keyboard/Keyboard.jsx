@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react'
+import { useMemo } from 'react'
 
-import { defaultKeyColors, keys } from './keys'
+import { keys } from './keys'
 import './Keyboard.css'
 
 const Key = ({ value, color, event }) => {
@@ -22,42 +22,18 @@ const Key = ({ value, color, event }) => {
   )
 }
 
-const Keyboard = ({ word, wordColors }) => {
-  const [colors, setColors] = useState(defaultKeyColors)
-  const [keyRows, setKeyRows] = useState([])
+const Keyboard = ({ keyColors }) => {
+  const keyRows = useMemo(() => {
+    return keys.map(row => row.map(({ key, keyCode, icon }) => {
+      const isSpecialButton = ['Enter', 'Backspace'].includes(key)
 
-  useEffect(() => {
-    setColors(values => {
-      const newColors = { ...values }
-      const isEmptyWord = word.every(v => v === '')
-
-      if (isEmptyWord) {
-        return defaultKeyColors
-      }
-
-      word.forEach((v, i) => {
-        if (wordColors[i] !== 'bg-white' && values[v] !== 'bg-success') {
-          newColors[v] = wordColors[i]
-        }
+      return ({
+        value: isSpecialButton ? icon : key.toUpperCase(),
+        color: isSpecialButton ? 'bg-transparent' : keyColors[key],
+        event: new KeyboardEvent('keydown', { key, keyCode })
       })
-
-      return newColors
-    })
-  }, [wordColors, word])
-
-  useEffect(() => {
-    setKeyRows(
-      keys.map(row => row.map(({ key, keyCode, icon }) => {
-        const isSpecialButton = ['Enter', 'Backspace'].includes(key)
-
-        return ({
-          value: isSpecialButton ? icon : key.toUpperCase(),
-          color: isSpecialButton ? 'bg-transparent' : colors[key],
-          event: new KeyboardEvent('keydown', { key, keyCode })
-        })
-      }))
-    )
-  }, [colors])
+    }))
+  }, [keyColors])
 
   return (
     <div className='mt-md-3 keyboard'>
